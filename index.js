@@ -17,11 +17,11 @@ function promptUser() {
             message: "Give a description of your project.",
             name: "description"
         },
-        {
-            type: "input",
-            message: "List the topics for table of contents.",
-            name: "tableOfContents"
-        },
+        // {
+        //     type: "input",
+        //     message: "List the topics for table of contents.",
+        //     name: "tableOfContents"
+        // },
         {
             type: "input",
             message: "List the steps for installation.",
@@ -55,36 +55,45 @@ function promptUser() {
     ]);
 };
 
-// function to write README file
+// function to generate README file
 function generateREADME(answers) {
-    return (
-        `# ${answers.title}
+    return `
 
-        ## Description 
-        ${answers.description}
+# ${answers.title}
+
+
+## Table of Contents
+* [Description](#description)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Tests](#test)
+* [Questions](#questions)
+* [Contributing Authors](#contributors)
+* [License](#license)
+
+# Description
+${answers.description}
+
+## Installation
+${answers.installation}
+
+## Usage
+${answers.usage}
         
-        ### Table of Contents
-        ${answers.tableOfContents}
-
-        ## Installation
-        ${answers.installation}
-
-        ## Usage
-        ${answers.usage}
+## Tests
+${answers.tests}
         
-        ### Tests
-        ${answers.test}
-        
-        ### Questions
-        ${answers.questions}
+## Questions
+${answers.questions}
 
-        ### Contributing Authors
-        ${answers.contributors}
+## Contributing Authors
+${answers.contributors}
 
-        ### License
-        ${answers.license}`
-    )
-}
+## License
+${answers.license}
+
+`;}
+
 
 // function to initialize program
 async function init() {
