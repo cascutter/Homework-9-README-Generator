@@ -9,48 +9,60 @@ function promptUser() {
     return inquirer.prompt ([
         {
             type: "input",
-            message: "Name your project.",
+            message: "Name your project:",
             name: "title"
         },
         {
             type: "input",
-            message: "Give a description of your project.",
+            message: "Provide a short description of your project:",
             name: "description"
         },
-        // {
-        //     type: "input",
-        //     message: "List the topics for table of contents.",
-        //     name: "tableOfContents"
-        // },
         {
             type: "input",
-            message: "List the steps for installation.",
+            message: "Provide the steps for installation:",
             name: "installation"
         },
         {
             type: "input",
-            message: "Give information about how to use your project.",
+            message: "Provide information about your application usage:",
             name: "usage"
         },
         {
             type: "input",
-            message: "Explain how to run tests for this system.",
+            message: "Provide instructions for testing your application:",
             name: "tests"
         },
         {
             type: "input",
-            message: "List any commonly asked questions about this project.",
-            name: "questions"
+            message: "Enter your GitHub username:",
+            name: "github"
         },
         {
             type: "input",
-            message: "Who holds the license to this project?",
-            name: "license"
+            message: "Provide the link to your GitHub profile:",
+            name: "githubLink"
         },
         {
             type: "input",
-            message: "List all contributing authors.",
+            message: "Enter your email address:",
+            name: "email"
+        },
+        {
+            type: "input",
+            message: "List all contributing authors:",
             name: "contributors"
+        },
+        {
+            type: "checkbox",
+            message: "Select the appropriate license:",
+            name: "license",
+            choices: [
+                "GNU AGPLv3",
+                "Mozilla Public License 2.0",
+                "Apache License 2.0",
+                "MIT License",
+                "Boost Software License 1.0"
+            ]
         },
     ]);
 };
@@ -84,7 +96,9 @@ ${answers.usage}
 ${answers.tests}
         
 ## Questions
-${answers.questions}
+All questions regarding this application can be directed to:
+<a href="${answers.githubLink}">${answers.github}</a>
+${answers.email}
 
 ## Contributing Authors
 ${answers.contributors}
@@ -97,7 +111,7 @@ ${answers.license}
 
 // function to initialize program
 async function init() {
-    console.log ("hi")
+    console.log ("Answer the prompts to generate a README.md.")
     try {
         const answers = await promptUser();
         const README = generateREADME(answers);
