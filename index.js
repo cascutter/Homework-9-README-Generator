@@ -1,11 +1,14 @@
+// Required dependencies
 const fs = require("fs");
 const inquirer = require("inquirer");
 const util = require("util");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
+// Function with user prompts
 function promptUser() {
-// array of questions for user
+    
+// Array of questions for user
     return inquirer.prompt ([
         {
             type: "input",
@@ -67,12 +70,14 @@ function promptUser() {
     ]);
 };
 
-// function to generate README file
+// Function to generate README file
 function generateREADME(answers) {
 
+// Generates badge based on prompt input
     let badge = `https://img.shields.io/badge/license-${answers.license}-brightgreen`;
     badge = encodeURI(badge);
-// 
+
+// Formats prompt input into README.md file
     return `
 
 # ${answers.title}
@@ -113,7 +118,7 @@ ${answers.license}
 `;}
 
 
-// function to initialize program
+// Function to initialize program
 async function init() {
     console.log ("Answer the prompts to generate a README.md.")
     try {
@@ -127,5 +132,5 @@ async function init() {
     }
 }
 
-// function call to initialize program
+// Function call to initialize program
 init();
