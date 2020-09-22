@@ -2,12 +2,13 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const util = require("util");
+const generateMarkdown = require("./utils/generateMarkdown");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
 // Function with user prompts
 function promptUser() {
-    
+
 // Array of questions for user
     return inquirer.prompt ([
         {
@@ -70,60 +71,12 @@ function promptUser() {
     ]);
 };
 
-// Function to generate README file
-function generateREADME(answers) {
-
-// Generates badge based on prompt input
-    let badge = `https://img.shields.io/badge/license-${answers.license}-brightgreen`;
-    badge = encodeURI(badge);
-
-// Formats prompt input into README.md file
-    return `
-
-# ${answers.title}
-![badge](${badge})
-
-## Table of Contents
-* [Description](#description)
-* [Installation](#installation)
-* [Usage](#usage)
-* [Tests](#test)
-* [Questions](#questions)
-* [Contributing Authors](#contributors)
-* [License](#license)
-
-# Description
-${answers.description}
-
-## Installation
-${answers.installation}
-
-## Usage
-${answers.usage}
-        
-## Tests
-${answers.tests}
-        
-## Questions
-All questions regarding this application can be directed to: \n 
-<a href="${answers.githubLink}">${answers.github}</a> \n
-<a href="mailto:${answers.email}">${answers.email}</a>
-
-# Contributing Authors
-${answers.contributors}
-
-# License
-${answers.license}
-
-`;}
-
-
 // Function to initialize program
 async function init() {
     console.log ("Answer the prompts to generate a README.md.")
     try {
         const answers = await promptUser();
-        const README = generateREADME(answers);
+        const README = generateMarkdown(answers);
 
         await writeFileAsync("README.md", README);
         console.log("Sucessfully wrote to README.md");
