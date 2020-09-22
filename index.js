@@ -69,10 +69,14 @@ function promptUser() {
 
 // function to generate README file
 function generateREADME(answers) {
+
+    let badge = `https://img.shields.io/badge/license-${answers.license}-brightgreen`;
+    badge = encodeURI(badge);
+// 
     return `
 
 # ${answers.title}
-
+![badge](${badge})
 
 ## Table of Contents
 * [Description](#description)
@@ -96,14 +100,14 @@ ${answers.usage}
 ${answers.tests}
         
 ## Questions
-All questions regarding this application can be directed to:
-<a href="${answers.githubLink}">${answers.github}</a>
-${answers.email}
+All questions regarding this application can be directed to: \n 
+<a href="${answers.githubLink}">${answers.github}</a> \n
+<a href="mailto:${answers.email}">${answers.email}</a>
 
-## Contributing Authors
+# Contributing Authors
 ${answers.contributors}
 
-## License
+# License
 ${answers.license}
 
 `;}
