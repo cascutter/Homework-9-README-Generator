@@ -38,7 +38,7 @@ All questions regarding this application can be directed to: \n
 <a href="mailto:${answers.email}">${answers.email}</a>
     
 # Contributing Authors
-${answers.contributors}
+* ${answers.contributors} \n
     
 # License
 ${answers.license}
